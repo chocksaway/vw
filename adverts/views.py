@@ -9,6 +9,11 @@ from django.contrib.auth import authenticate, login
 
 from django.http import HttpResponseRedirect, HttpResponse
 
+from django.views.decorators.cache import cache_page
+from django.core.cache import cache
+
+from random import randint
+
 
 def index(request):
     return render_to_response('templates/index.html', {
@@ -20,6 +25,10 @@ def view_search(request, user):
         'post': get_object_or_404(User)
     })
 
+@cache_page(60 * 1)
+def cache_me(request):
+    cache.set('a-unique-key', randint(1, 100))
+    return HttpResponse(cache.get('a-unique-key'))
 
 def register(request):
     # Like before, get the request's context.
