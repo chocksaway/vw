@@ -11,6 +11,5 @@ urlpatterns = patterns('',
     url(r'register/$', 'adverts.views.register'),
     url(r'login/$', 'adverts.views.user_login'),
     url(r'cache/$', 'adverts.views.cache_me'),
-
-
+    url(r'search/$', 'adverts.views.search'),
 )
